@@ -6,6 +6,7 @@ import morgan from 'morgan';
 // Utils
 import request from 'request';
 import urlencode from 'urlencode';
+import statsBuilder from './statsBuilder';
 
 import * as constants from './constants';
 
@@ -49,25 +50,15 @@ server.get('/:plat/:region/:id', (req, res) => {
     return;
   }
 
-  const options = {
-    url: `https://playoverwatch.com/en-us/career/${plat}/${region}/${urlencode(id)}`,
-    headers: {
-      'Accept': 'application/json'
-    }
-  }
-  request(options, (err, respond, body) => {
+  request(`https://playoverwatch.com/en-us/career/${plat}/${region}/${urlencode(id)}`, (err, respond, body) => {
+    // TODO: Check not found
     if (err) {
       res.json(err);
       return;
     }
-    res.send(body);
-    // body = JSON.parse(body);
-    // const { statusCode, error } = body;
-    // if (statusCode != undefined) {
-    //   res.status(statusCode).json({ message: error });
-    // } else {
-    //   res.json(body);
-    // }
+    statsBuilder(body).then((stats) => {
+      res.json(stats);
+    });
   });
 
 });
