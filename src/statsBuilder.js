@@ -7,6 +7,8 @@ const statsBuilder = (html) => {
       let idAndNames = reformNames(values[0]);
       let idAndStats = reformStats(values[1]);
       return combineNameAndStates(idAndNames, idAndStats);
+    }, (err) => {
+      throw err;
     });
 };
 
@@ -19,6 +21,9 @@ const getIdAndNames = (html) => {
           name: '@text'
         }]
       )((err, names) => {
+        if (names.length === 0) {
+          reject({ message: "找不到与该Battletag相关的信息。" });
+        }
         resolve(names);
       })
     }
@@ -38,6 +43,9 @@ const getIdAndStats = (html) => {
             }]
           )
         }])((err, stats) => {
+          if (stats.length === 0) {
+            reject({ message: "找不到与该Battletag相关的信息。" });
+          }
           resolve(stats);
         });
     }

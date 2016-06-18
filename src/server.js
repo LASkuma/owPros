@@ -50,14 +50,16 @@ server.get('/:plat/:region/:id', (req, res) => {
     return;
   }
 
+  // Scrapping
   request(`https://playoverwatch.com/en-us/career/${plat}/${region}/${urlencode(id)}`, (err, respond, body) => {
-    // TODO: Check not found
     if (err) {
       res.json(err);
       return;
     }
     statsBuilder(body).then((stats) => {
       res.json(stats);
+    }, (err) => {
+      res.status(404).json(err);
     });
   });
 
