@@ -1,10 +1,10 @@
 {
-  "name": "ow-helper-be",
+  "name": "ow-pros-be",
   "version": "1.0.0",
-  "description": "",
+  "description": "owpros",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon index.js"
+    "start": "NODE_ENV=development node ./src/server"
   },
   "repository": {
     "type": "git",
