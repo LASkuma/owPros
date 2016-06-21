@@ -32,6 +32,9 @@ module.exports =  (env) => {
         query: {
           presets: ['es2015-webpack', 'react']
         }
+      }, {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }]
     },
     plugins: [

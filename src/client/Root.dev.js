@@ -4,6 +4,9 @@ import Router from 'react-router/lib/Router'
 import match from 'react-router/lib/match'
 import browserHistory from 'react-router/lib/browserHistory'
 import { Provider } from 'react-redux'
+import './assets/normalize.css';
+import './assets/skeleton.css';
+
 import DevTools from '../common/DevTools';
 
 import { trigger } from 'redial'
