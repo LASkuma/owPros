@@ -1,37 +1,51 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { queryStats } from '../actions';
+import { withRouter } from 'react-router';
+import { queryRegionChange } from '../actions';
 
-const Home = ( { handleSubmit, stats }) => {
+const Home = ( { handleRegionChange, region, regionText, router }) => {
   return (
     <div>
       <h1>Op | OW Pros</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" /><input type="submit" value="Submit" />
-      </form>
-      <h2>{stats.length}</h2>
+      <input type='text' ref={node => {
+        this.input = node;
+      }}/>
+      <button onClick={handleRegionChange}>{regionText}</button>
+      <button onClick={() => router.push(`/career/${region}/${this.input.value}`)}>查询</button>
     </div>
   )
 }
 
 Home.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  stats: PropTypes.array
+  handleRegionChange: PropTypes.func.isRequired,
+  region: PropTypes.string.isRequired,
+  regionText: PropTypes.string.isRequired,
+  router: React.PropTypes.shape({
+    push: React.PropTypes.func.isRequired
+  }).isRequired
+}
+
+const getRegionText = (region) => {
+  switch(region) {
+    case 'us':
+      return '美服';
+
+    default:
+      return '国服';
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.currentStats.stats
-  };
+    region: state.query.region,
+    regionText: getRegionText(state.query.region)
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit: (e) => {
-      e.preventDefault();
-      dispatch(queryStats('LASkuma-1824'));
-    }
+    handleRegionChange: () => dispatch(queryRegionChange())
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

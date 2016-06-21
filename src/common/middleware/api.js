@@ -2,27 +2,14 @@ import axios from 'axios';
 
 export const CALL_API = Symbol('Call API');
 
-const callApi = (endpoint, queries) => {
-  if (typeof queries !== undefined && queries.length > 0) {
-    const query = queries[0];
-    queries.shift();
-    return axios.get(endpoint, { params: query })
-      .then((response) => {
-        return response;
-      }, (err) => {
-        if (queries.length === 0) {
-          throw err;
-        }
-        return callApi(endpoint, queries);
-      });
-  }
+const callApi = (endpoint) => {
   return axios.get(endpoint)
     .then((response) => {
       return response;
     }, (err) => {
       throw err;
     });
-}
+};
 
 export default (store) => (next) => (action) => {
   const callAPI = action[CALL_API];
@@ -30,7 +17,7 @@ export default (store) => (next) => (action) => {
     return next(action);
   }
 
-  const { endpoint, queries, types } = callAPI;
+  const { endpoint, types } = callAPI;
 
   if (typeof endpoint !== 'string') {
     throw new Error('Specify a string endpoint URL.');
@@ -46,19 +33,19 @@ export default (store) => (next) => (action) => {
     const finalAction = Object.assign({}, action, data);
     delete finalAction[CALL_API];
     return finalAction;
-  }
+  };
 
   const [ requestType, successType, failureType ] = types;
   next(actionWith({ type: requestType }));
 
-  return callApi(endpoint, queries).then(
+  return callApi(endpoint).then(
     (response) => next(actionWith({
       response: response.data,
       type: successType
     })),
     (error) => next(actionWith({
       type: failureType,
-      error: error.message || 'Something bad happened'
+      error: error.data || 'Something bad happened'
     }))
   );
-}
+};

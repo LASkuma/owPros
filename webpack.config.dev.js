@@ -20,7 +20,7 @@ module.exports =  (env) => {
     output: {
       path: resolve(__dirname, 'dist'),
       filename: '[name].js',
-      chunkFilename: 'chunk.js',
+      chunkFilename: 'chunk.[id].js',
       publicPath: '/build/static/'
     },
     context: resolve(__dirname, 'src'),

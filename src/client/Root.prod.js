@@ -23,9 +23,7 @@ const routes = createRoutes(store)
 match({ routes, location }, () => {
   render((
     <Provider store={store}>
-      <div>
         <Router history={browserHistory} routes={routes} />
-      </div>
     </Provider>
   ), document.getElementById('root'))
 })

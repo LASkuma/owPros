@@ -1,15 +1,19 @@
 import { combineReducers } from 'redux'
 import * as ActionTypes from './actions'
 
-function currentStats(state = {
-  isFetching: false,
-  stats: []
-}, action) {
+const query = (state = { region: 'cn' }, action) => {
   switch(action.type) {
-    case ActionTypes.STATS_QUERY_REQUEST:
-      return Object.assign({}, state, { isFetching: true });
-    case ActionTypes.STATS_QUERY_SUCCESS:
-      return Object.assign({}, state, { stats: action.response, isFetching: false });
+    case ActionTypes.QUERY_REGION_CHANGE:
+      let nextRegion;
+      switch(state.region) {
+        case 'cn':
+          nextRegion = 'us';
+          break;
+        default:
+          nextRegion = 'cn';
+      }
+      return Object.assign({}, state, { region: nextRegion });
+
     default:
       return state;
   }
@@ -17,7 +21,7 @@ function currentStats(state = {
 // Add async reducers
 export default function createReducer(asyncReducers) {
   return combineReducers({
-    currentStats,
+    query,
     ...asyncReducers
   })
 }
