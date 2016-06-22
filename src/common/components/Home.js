@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { queryRegionChange } from '../actions';
+import { queryRegionChange, newQueryError } from '../actions';
+import ErrorPanel from './ErrorPanel';
 
-const Home = ( { handleRegionChange, region, regionText, router }) => {
+const Home = ({ handleRegionChange, handleQueryError, region, regionText, router }) => {
   return (
     <div>
       <header style={style.header}>
@@ -17,7 +18,7 @@ const Home = ( { handleRegionChange, region, regionText, router }) => {
           <div className="eight columns offset-by-two">
             <form style={{marginBottom: '0px'}}>
               <div style={Object.assign({}, style.right, {width: '50px', marginLeft: '6px'})}>
-                <input className="button" type="submit" value="go" onClick={(e) => handleSubmit(router, region, this.input.value)(e)} style={style.go} />
+                <input className="button" type="submit" value="go" onClick={(e) => handleSubmit(router, region, this.input.value, handleQueryError)(e)} style={style.go} />
               </div>
               <div style={style.left}>
                 <div style={style.right}>
@@ -30,6 +31,7 @@ const Home = ( { handleRegionChange, region, regionText, router }) => {
                 </div>
               </div>
             </form>
+            <ErrorPanel />
             <p style={{color: 'white'}}>
               【注意】点击右侧服务器名称切换区域，英文字母区分大小写。
             </p>
@@ -43,21 +45,24 @@ const Home = ( { handleRegionChange, region, regionText, router }) => {
 
 Home.propTypes = {
   handleRegionChange: PropTypes.func.isRequired,
+  handleQueryError: PropTypes.func.isRequired,
   region: PropTypes.string.isRequired,
   regionText: PropTypes.string.isRequired,
   router: React.PropTypes.shape({
     push: React.PropTypes.func.isRequired
   }).isRequired
-}
+};
 
-const handleSubmit = (router, region, battletag) => (e) => {
+const handleSubmit = (router, region, battletag, handleQueryError) => (e) => {
   e.preventDefault();
   const battleTagRegEx = /^.+#[0-9]+$/;
   if (battleTagRegEx.test(battletag)) {
     battletag = battletag.replace(/#/, '-');
     router.push(`/career/${region}/${battletag}`);
+  } else {
+    handleQueryError('请输入以 #数字 结尾的完整Battletag。');
   }
-}
+};
 
 const getRegionText = (region) => {
   switch(region) {
@@ -67,7 +72,7 @@ const getRegionText = (region) => {
     default:
       return '国服';
   }
-}
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -78,9 +83,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleRegionChange: (e) => {
+    handleRegionChange(e) {
       e.preventDefault();
       dispatch(queryRegionChange());
+    },
+    handleQueryError(message) {
+      dispatch(newQueryError(message));
     }
   };
 }
@@ -95,7 +103,7 @@ const style = {
     display: 'block',
     boxSizing: 'border-box',
     lineHeight: '1.5',
-    color: '#373a3c',
+    color: '#2a2a2a',
     backgroundColor: '#f9be4a',
   },
   logo: {
