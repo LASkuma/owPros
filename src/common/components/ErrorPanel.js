@@ -3,13 +3,20 @@ import { connect } from 'react-redux';
 import { dismissQueryError } from '../actions';
 
 class ErrorPanel extends Component {
+  wrapperStyle() {
+    const { dismissed } = this.props;
+    if (dismissed) {
+      return Object.assign({}, style.wrapper, { top: '-320px' });
+    }
+    return Object.assign({}, style.wrapper, { top: '-10px' });
+  }
+  
   render() {
     const { dismissed, message, dismissQueryError } = this.props;
     return (
       <div
-        className={dismissed ? 'error-panel' : 'error-panel error-active'}
         onClick={dismissQueryError}
-        style={style.wrapper}>
+        style={this.wrapperStyle()}>
         <div style={style.panel}>
           <div style={style.header}>
             <span style={style.icon}>!</span>
@@ -37,7 +44,18 @@ export default connect(mapStateToProps, { dismissQueryError })(ErrorPanel);
 
 const style = {
   wrapper: {
-    position: 'relative'
+    position: 'relative',
+    WebkitTransition: 'all 500ms cubic-bezier(0.505, 0, 0.315, 1)', /* older webkit */
+    WebkitTransition: 'all 500ms cubic-bezier(0.505, -0.045, 0.315, 1.350)',
+    MozTransition: 'all 500ms cubic-bezier(0.505, -0.045, 0.315, 1.350)',
+    OTransition: 'all 500ms cubic-bezier(0.505, -0.045, 0.315, 1.350)',
+    transition: 'all 500ms cubic-bezier(0.505, -0.045, 0.315, 1.350)', /* custom */
+
+    WebkitTransitionTimingFunction: 'cubic-bezier(0.505, 0, 0.315, 1)', /* older webkit */
+    WebkitTransitionTimingFunction: 'cubic-bezier(0.505, -0.045, 0.315, 1.350)',
+    MozTransitionTimingFunction: 'cubic-bezier(0.505, -0.045, 0.315, 1.350)',
+    OTransitionTimingFunction: 'cubic-bezier(0.505, -0.045, 0.315, 1.350)',
+    transitionTimingFunction: 'cubic-bezier(0.505, -0.045, 0.315, 1.350)' /* custom */
   },
   panel: {
     position: 'absolute',
