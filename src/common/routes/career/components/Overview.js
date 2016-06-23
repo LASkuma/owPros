@@ -7,26 +7,32 @@ const Overview = ({ winRate, kd, spm }) => {
         <span style={style.wrTitle}>
           胜率
         </span>
-        <span style={style.wrData}>
-          {winRate}
-        </span>
+        <div style={{textAlign: 'center', marginTop: 20}}>
+          <span style={style.wrData}>
+            {winRate}
+          </span>
+        </div>
       </div>
       <div style={style.rightPanel}>
-        <div style={{height: '70px', backgroundColor: '#E23849'}}>
+        <div style={{height: '78px', backgroundColor: '#FF1744'}}>
           <span style={style.rpTitle}>
             K/D
           </span>
-          <span style={style.rpData}>
-            {kd}
-          </span>
+          <div style={{textAlign: 'center', marginTop: 8}}>
+            <span style={style.rpData}>
+              {kd}
+            </span>
+          </div>
         </div>
-        <div style={{height: '70px', backgroundColor: '#573EFC'}}>
+        <div style={{height: '78px', backgroundColor: '#2979ff'}}>
           <span style={style.rpTitle}>
             每分钟得分
           </span>
-          <span style={style.rpData}>
-            {spm}
-          </span>
+          <div style={{textAlign: 'center', marginTop: 8}}>
+            <span style={style.rpData}>
+              {spm}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -44,36 +50,36 @@ export default Overview;
 const style = {
   wrBackground: {
     width: '50%',
-    height: '140px',
-    backgroundColor: '#7ae22d',
+    height: '156px',
+    backgroundColor: '#1DE9B6',
     display: 'inline-block'
   },
   wrTitle: {
       display: 'block',
-      paddingTop: '26px',
-      paddingLeft: '10px',
-      fontSize: '1.2em'
+      paddingTop: 10,
+      paddingLeft: 10,
+      fontSize: 14,
+      lineHeight: '14px'
   },
   wrData: {
-      paddingLeft: '10px',
       fontSize: '3em'
   },
   rightPanel: {
       display: 'inline-block',
       width: '50%',
-      height: '140px',
+      height: '156px',
       verticalAlign: 'top'
   },
   rpTitle: {
       display: 'block',
-      paddingTop: '6px',
+      paddingTop: '10px',
       paddingLeft: '10px',
-      fontSize: '1.2em'
+      fontSize: '14px',
+      lineHeight: '14px'
   },
   rpData: {
     display: 'block',
-    paddingLeft: '10px',
     lineHeight: '26px',
-    fontSize: '2em'
+    fontSize: '3em'
   }
 };

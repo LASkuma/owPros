@@ -2,7 +2,7 @@ import React from 'react';
 import Nav from './Nav';
 import SearchBlock from './SearchBlock';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, dark }) => {
   return (
     <div>
       <Nav>
@@ -10,8 +10,10 @@ const Layout = ({ children }) => {
           <SearchBlock />
         </div>
       </Nav>
-      <div className="container">
-        { children }
+      <div className="row-wrapper" style={dark?{backgroundColor:'#2a2a2a'}:{}}>
+        <div className="container">
+          { children }
+        </div>
       </div>
     </div>
   )

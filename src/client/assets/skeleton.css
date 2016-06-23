@@ -45,7 +45,6 @@
 @media (min-width: 400px) {
   .container {
     width: 85%;
-    margin-top: 50px;
     padding: 0; }
 }
 
@@ -419,4 +418,16 @@ there.
 @media (min-width: 1200px) {}
 
 /* MY stuff */
+.row-wrapper {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+@media (min-width: 400px) {
+  .row-wrapper {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
+
 @font-face { font-family: "Overwatch"; src: url("http://us.battle.net/forums/static/fonts/bignoodletoo/bignoodletoo.woff") format('woff'); }

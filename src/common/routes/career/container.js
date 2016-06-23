@@ -13,10 +13,10 @@ const redial = {
 
 const careerPage = () => {
   return (
-    <Layout>
+    <Layout dark={true}>
       <div className="row">
         <div className="three columns">
-          <div style={{width: '100%'}}>
+          <div style={{width: '100%', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
             <CardHeader title="概况" />
             <NameTag name="LASkuma" />
             <Overview winRate="49.8%" kd="2.41" spm="2000" />
