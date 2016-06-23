@@ -104,7 +104,8 @@ const style = {
     width: '30px'
   },
   battletag: {
-    paddingRight: '45px'
+    paddingRight: '45px',
+    marginBottom: 0
   },
   go: {
     fontFamily: 'Overwatch',
@@ -113,6 +114,7 @@ const style = {
     paddingRight: '16px',
     backgroundColor: '#f9be4a',
     border: 'none',
-    color: 'black'
+    color: 'black',
+    marginBottom: 0
   }
-}
+};

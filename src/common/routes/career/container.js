@@ -2,14 +2,28 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 import { getStats } from './actions';
+import Layout from '../../components/Layout';
+import CardHeader from './components/CardHeader';
+import NameTag from './components/NameTag';
+import Overview from './components/Overview';
 
 const redial = {
   defer: ({ dispatch , params }) => dispatch(getStats(params))
-}
+};
 
 const careerPage = () => {
   return (
-    <h1>Career</h1>
+    <Layout>
+      <div className="row">
+        <div className="three columns">
+          <div style={{width: '100%'}}>
+            <CardHeader title="概况" />
+            <NameTag name="LASkuma" />
+            <Overview winRate="49.8%" kd="2.41" spm="2000" />
+          </div>
+        </div>
+      </div>
+    </Layout>
   )
 }
 
