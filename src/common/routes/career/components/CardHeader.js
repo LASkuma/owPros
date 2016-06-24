@@ -18,11 +18,12 @@ CardHeader.propTypes = {
 
 const style = {
   background: {
-    backgroundColor: '#f9be4a',
+    backgroundColor: '#404040',
     height: 40
   },
   title: {
     lineHeight: '40px',
-    marginLeft: 10
+    marginLeft: 10,
+    color: 'white'
   }
-}
+};

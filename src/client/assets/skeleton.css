@@ -322,17 +322,21 @@ pre > code {
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-th,
+th {
+  padding: 0 15px;
+  text-align: left;
+}
 td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #E1E1E1; }
-th:first-child,
+}
+  /*border-bottom: 1px solid #E1E1E1; }*/
+/*th:first-child,
 td:first-child {
   padding-left: 0; }
 th:last-child,
 td:last-child {
-  padding-right: 0; }
+  padding-right: 0; }*/
 
 
 /* Spacing
@@ -428,6 +432,10 @@ there.
     padding-top: 50px;
     padding-bottom: 50px;
   }
+}
+
+table.stripped tbody tr:nth-child(odd) {
+  background-color: #333333;
 }
 
 @font-face { font-family: "Overwatch"; src: url("http://us.battle.net/forums/static/fonts/bignoodletoo/bignoodletoo.woff") format('woff'); }

@@ -51,7 +51,7 @@ const style = {
   wrBackground: {
     width: '50%',
     height: '156px',
-    backgroundColor: '#1DE9B6',
+    backgroundColor: '#f9be4a',
     display: 'inline-block'
   },
   wrTitle: {
