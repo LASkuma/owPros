@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import CardHeader from './CardHeader';
 
-const Card = ({ children, title }) => {
+const Card = ({ children, title, type }) => {
   return (
     <div className="card" style={style.card}>
-      <CardHeader title={title} />
+      <CardHeader title={title} type={type} />
       {children}
     </div>
   );
@@ -12,7 +12,8 @@ const Card = ({ children, title }) => {
 
 Card.propTypes = {
   children: PropTypes.element.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string
 };
 
 export default Card;

@@ -12,7 +12,7 @@ class SearchInput extends Component {
         battletag = battletag.replace(/#/, '-');
         router.push(`/career/${region}/${battletag}`);
       } else {
-        handleQueryError('请输入以 #数字 结尾的完整Battletag。');
+        handleQueryError('请输入以 #数字 结尾的完整战网id。');
       }
     };
   }

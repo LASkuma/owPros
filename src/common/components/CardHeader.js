@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
-const CardHeader = ({ title }) => {
+const CardHeader = ({ title, type }) => {
   return (
-    <div style={style.background}>
+    <div style={backgroundStyle(type)}>
       <span style={style.title}>
         { title }
       </span>
@@ -13,7 +13,16 @@ const CardHeader = ({ title }) => {
 export default CardHeader;
 
 CardHeader.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string
+};
+
+const backgroundStyle = (type) => {
+  const basic = style.background;
+  if (type === 'error') {
+    return Object.assign({}, basic, {backgroundColor: '#FF1744'});
+  }
+  return basic;
 };
 
 const style = {

@@ -1,11 +1,28 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Table from '../../../components/Table';
+import Card from '../../../components/Card';
 import HeroIcon from './HeroIcon';
 
-const FrequentUsedHeroes = ({ frequentHeroes }) => {
+const FrequentUsedHeroes = ({ frequentHeroes, hasError, errorMessage, isFetching }) => {
+  if (hasError) {
+    return (
+      <Card title="出错了" type="error">
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200, backgroundColor: 'white'}}>
+          <p>{errorMessage}</p>
+        </div>
+      </Card>
+    )
+  }
+  if (isFetching) {
+    return (
+      <div></div>
+    );
+  }
   return (
-    <Table heads={tableHead} data={frequentHeroes.slice(0, 5)} />
+    <Card title="常用英雄">
+      <Table heads={tableHead} data={frequentHeroes.slice(0, 5)} />
+    </Card>
   );
 }
 
@@ -58,9 +75,16 @@ const getFrequentHeroes = (heroes) => {
 
 };
 
+const hasError = (error, stats) => {
+  return typeof error.message !== 'undefined' && stats.length === 0;
+};
+
 const mapStateToProps = (state) => {
   return {
-    frequentHeroes: getFrequentHeroes(state.currentStats.stats)
+    frequentHeroes: getFrequentHeroes(state.currentStats.stats),
+    hasError: hasError(state.currentStats.error, state.currentStats.stats),
+    errorMessage: state.currentStats.error.message,
+    isFetching: state.currentStats.isFetching
   }
 };
 

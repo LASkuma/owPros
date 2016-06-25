@@ -1,12 +1,21 @@
 import React, { PropTypes } from 'react';
 
-const UpdateButton = ({ isFetching, hasError }) => {
+const UpdateButton = ({ isFetching, hasError, handleClick }) => {
   if (isFetching) {
     return (
       <button style={style.fetching.button} disabled>
         正在同步数据<img src={spinUrl} style={style.fetching.img} />
       </button>
     )
+  }
+  if (hasError) {
+    return (
+        <button
+          onClick={handleClick}
+          style={Object.assign({},style.fetching.button,{backgroundColor:'#f9be4a'})} >
+          重试
+        </button>
+      )
   }
   return (
     <button style={style.completed.button} disabled>
@@ -33,7 +42,7 @@ const style = {
       color: '#2a2a2a',
       border: 'none',
       fontSize: '14px',
-      backgroundColor: '#f9be4a'
+      backgroundColor: '#ad7505'
     },
     img: {
       verticalAlign: 'middle',

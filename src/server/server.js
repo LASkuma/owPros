@@ -85,7 +85,7 @@ server.get('/api/stats', (req, res) => {
 
   if (!constants.battleTagRegEx.test(battletag)) {
     res.status(404).json({
-      message: "请输入以 #数字 结尾的完整Battletag。"
+      message: "请输入以 #数字 结尾的完整战网id。"
     });
     return;
   }

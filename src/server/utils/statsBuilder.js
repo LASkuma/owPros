@@ -22,7 +22,7 @@ const getIdAndNames = (html) => {
         }]
       )((err, names) => {
         if (names.length === 0) {
-          reject({ message: "找不到与该Battletag相关的信息。" });
+          reject({ message: "找不到与该战网id相关的信息，请检查服务器与战网id后重试。" });
         }
         resolve(names);
       })
@@ -44,7 +44,7 @@ const getIdAndStats = (html) => {
           )
         }])((err, stats) => {
           if (stats.length === 0) {
-            reject({ message: "找不到与该Battletag相关的信息。" });
+            reject({ message: "找不到与该战网id相关的信息，请检查服务器与战网id后重试。" });
           }
           resolve(stats);
         });

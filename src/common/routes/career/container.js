@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 import { getStats } from './actions';
 import Layout from '../../components/Layout';
-import Card from '../../components/Card';
 import NameTag from './components/NameTag';
 import Overview from './components/Overview';
 import FrequentUsedHeroes from './components/FrequentUsedHeroes';
@@ -18,14 +17,10 @@ const careerPage = () => {
     <Layout dark={true}>
       <div className="row">
         <div className="four columns">
-          <Card title="概况">
-            <Profile />
-          </Card>
+          <Profile />
         </div>
         <div className="eight columns">
-          <Card title="常用英雄">
-            <FrequentUsedHeroes />
-          </Card>
+          <FrequentUsedHeroes />
         </div>
       </div>
     </Layout>
