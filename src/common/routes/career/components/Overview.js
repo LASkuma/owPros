@@ -7,7 +7,7 @@ const Overview = ({ winRate, kd, spm }) => {
         <span style={style.wrTitle}>
           胜率
         </span>
-        <div style={{textAlign: 'center', marginTop: 20}}>
+        <div style={{textAlign: 'center', marginTop: 30}}>
           <span style={style.wrData}>
             {winRate}
           </span>
@@ -26,7 +26,7 @@ const Overview = ({ winRate, kd, spm }) => {
         </div>
         <div style={{height: '78px', backgroundColor: '#2979ff'}}>
           <span style={style.rpTitle}>
-            每分钟得分
+            场均得分
           </span>
           <div style={{textAlign: 'center', marginTop: 8}}>
             <span style={style.rpData}>
@@ -62,7 +62,7 @@ const style = {
       lineHeight: '14px'
   },
   wrData: {
-      fontSize: '3em'
+      fontSize: '2.3em'
   },
   rightPanel: {
       display: 'inline-block',
@@ -80,6 +80,6 @@ const style = {
   rpData: {
     display: 'block',
     lineHeight: '26px',
-    fontSize: '3em'
+    fontSize: '2.3em'
   }
 };
