@@ -15,7 +15,7 @@ export function getStats(query) {
   };
 }
 
-function sendQuery({ region, battletag }) {
+export function sendQuery({ region, battletag }) {
   return {
     [CALL_API]: {
       types: [ STATS_QUERY_REQUEST, STATS_QUERY_SUCCESS, STATS_QUERY_FAILURE ],
@@ -29,5 +29,18 @@ export const STATS_CLEAR = 'STATS_CLEAR';
 function clearStats() {
   return {
     type: STATS_CLEAR
+  };
+}
+
+export const STATS_PREFETCH_REQUEST = 'STATS_PREFETCH_REQUEST';
+export const STATS_PREFETCH_SUCCESS = 'STATS_PREFETCH_SUCCESS';
+export const STATS_PREFETCH_FAILURE = 'STATS_PREFETCH_FAILURE';
+
+export function prefetchStats({ region, battletag }) {
+  return {
+    [CALL_API]: {
+      types: [ STATS_PREFETCH_REQUEST, STATS_PREFETCH_SUCCESS, STATS_PREFETCH_FAILURE ],
+      endpoint: `/api/career?region=${region}&battletag=${battletag}`
+    }
   };
 }

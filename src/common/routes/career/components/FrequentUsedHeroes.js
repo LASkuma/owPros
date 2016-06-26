@@ -14,7 +14,7 @@ const FrequentUsedHeroes = ({ frequentHeroes, hasError, errorMessage, isFetching
       </Card>
     )
   }
-  if (isFetching) {
+  if (frequentHeroes.length === 0) {
     return (
       <div></div>
     );

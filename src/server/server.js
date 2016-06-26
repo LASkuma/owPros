@@ -11,6 +11,9 @@ import bodyParser from 'body-parser';
 import compression from 'compression';
 import morgan from 'morgan';
 
+import { MongoClient } from 'mongodb';
+let db;
+
 // Utils
 import request from 'request';
 import urlencode from 'urlencode';
@@ -64,6 +67,37 @@ if (devMode) {
   }));
 }
 
+server.get('/api/career', (req, res) => {
+  const region = req.query.region;
+  const battletag = req.query.battletag;
+
+  if (constants.regions.indexOf(region) < 0) {
+    res.status(404).json({
+      message: "抱歉，暂不支持该服务器。"
+    });
+    return;
+  }
+
+  if (!constants.battleTagRegEx.test(battletag)) {
+    res.status(404).json({
+      message: "请输入以 #数字 结尾的完整战网id。"
+    });
+    return;
+  }
+
+  db.collection('career').findOne({battletag: battletag + region}, (error, doc) => {
+    if (error) {
+      res.status(500).json(error);
+      return;
+    }
+    if (!doc) {
+      res.status(400).end();
+      return;
+    }
+    res.json(doc.stats);
+  });
+});
+
 server.get('/api/stats', (req, res) => {
   const plat = req.query.plat;
   const region = req.query.region;
@@ -97,6 +131,18 @@ server.get('/api/stats', (req, res) => {
       return;
     }
     statsBuilder(body).then((stats) => {
+      db.collection('career').findOneAndUpdate({battletag: battletag + region}, {$set: {stats: stats}}, (error, result) => {
+        if (error) {
+          console.error(error);
+        }
+        if (!result.value) {
+          db.collection('career').insertOne({ battletag: battletag + region, stats }, (e, result) => {
+            if (e) {
+              console.error(e);
+            }
+          });
+        }
+      });
       res.json(stats);
     }, (err) => {
       res.status(404).json(err);
@@ -142,12 +188,19 @@ server.get('*', (req, res) => {
   });
 });
 
-server.listen(port, (error) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port);
+MongoClient.connect('mongodb://owpros:owpros2016SummerEnd@ds023704.mlab.com:23704/owpros', (err, database) => {
+  if (err) {
+    console.error(err);
+    return;
   }
+  db = database;
+  server.listen(port, (error) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port);
+    }
+  });
 });
 
 module.exports = server;

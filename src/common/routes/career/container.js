@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
-import { getStats } from './actions';
+import { getStats, prefetchStats } from './actions';
 import Layout from '../../components/Layout';
 import NameTag from './components/NameTag';
 import Overview from './components/Overview';
@@ -9,7 +8,8 @@ import FrequentUsedHeroes from './components/FrequentUsedHeroes';
 import Profile from './components/Profile';
 
 const redial = {
-  defer: ({ dispatch , params }) => dispatch(getStats(params))
+  fetch: ({ dispatch, params }) => dispatch(prefetchStats(params)),
+  defer: ({ dispatch, params }) => dispatch(getStats(params))
 };
 
 const careerPage = () => {
@@ -27,4 +27,4 @@ const careerPage = () => {
   )
 };
 
-export default provideHooks(redial)(connect()(careerPage));
+export default provideHooks(redial)(careerPage);
