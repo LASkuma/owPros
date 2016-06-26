@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 // Webpack related
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
@@ -65,6 +66,10 @@ if (devMode) {
   server.use(webpackHotMiddleware(compiler, {
     log: console.log
   }));
+}
+
+if (!devMode) {
+  server.use('/static', express.static(resolve(__dirname, '../../dist')));
 }
 
 server.get('/api/career', (req, res) => {

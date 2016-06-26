@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 
 export default class HeroIcon extends Component {
   getImageUrl(id) {
-    return `https://d1u1mce87gyfbn.cloudfront.net/game/heroes/${id}.png`;
+    return `http://caodi.me/hero-icons/${id}.png`;
   }
 
   getStyle(id) {
