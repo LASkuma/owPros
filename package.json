@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development node ./src/server",
-    "start:prod": "webpack && NODE_ENV=production forever start -l forever.log -o out.log -e err.log ./src/server",
+    "start:prod": "npm run clean && webpack && NODE_ENV=production forever start -l forever.log -o out.log -e err.log ./src/server",
+    "stop:prod": "forever stop ./src/server",
+    "clean": "rm *.log && rm ~/.forever/forever.log",
     "build": "webpack"
   },
   "repository": {
