@@ -9,7 +9,7 @@ const Home = () => {
       <div style={style.block}>
         <div className="container">
           <div className="row">
-          <div className="eight columns offset-by-two">
+          <div className="eight columns offset-by-two" style={{paddingLeft: 10, paddingRight: 8}}>
             <SearchBlock />
             <p style={{color: 'white', marginTop: 10}}>
               【注意】点击右侧服务器名称切换区域，英文字母区分大小写。

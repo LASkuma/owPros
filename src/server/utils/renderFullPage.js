@@ -11,6 +11,7 @@ const render = (html, initialState) => {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <title>OWPros | 守望先锋战绩查询</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />

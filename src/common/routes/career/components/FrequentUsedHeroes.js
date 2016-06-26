@@ -9,7 +9,7 @@ const FrequentUsedHeroes = ({ frequentHeroes, hasError, errorMessage, isFetching
     return (
       <Card title="出错了" type="error">
         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200, backgroundColor: 'white'}}>
-          <p>{errorMessage}</p>
+          <p style={{paddingLeft: 10, paddingRight: 10}}>{errorMessage}</p>
         </div>
       </Card>
     )

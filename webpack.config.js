@@ -4,6 +4,7 @@ const AssetsPlugin = require('assets-webpack-plugin');
 
 module.exports =  (env) => {
   return {
+    devtool: false,
     entry: {
       main: [
         './client/index.js'
